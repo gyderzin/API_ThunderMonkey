@@ -35,11 +35,15 @@ $app->group('/api/agendamento', function () {
     $this->put('/atualizar_agendamentos', function($request, $response) {
         // rota responsavel por atualizar um agendamento
         $dados = $request->getParsedBody();
+        $id = $dados['id'];
         Agendamento::where('id', $id)->update([
-            'circuito'       => $dados['circuito'],
+            'nome'           => $dados['nome'],
+            'circuitos'       => $dados['circuitos'],
             'hora'           => $dados['hora'],
             'intervalo_dias' => $dados['intervalo_dias']
         ]);
+
+        return $response->withJson($dados);
     });
     $this->delete('/deletar_agendamento', function($request, $response){
         // rota responsavel por deletar um agendamento
