@@ -6,11 +6,12 @@ use App\Models\Circuito;
 use App\Models\Agendamento;
 
 $app->group('/api/agendamento', function () { 
-    $this->post('/agendamento_rotina', function($request, $response) {
+    $this->post('/novo_agendamento', function($request, $response) {
         // rota responsavel por criar e enviar os dados de agendamento para o db
         $dados = $request->getParsedBody();
         Agendamento::insert([
             'id_dp'          => $dados['id_dp'],
+            'nome'           => $dados['nome'],
             'circuitos'      => $dados['circuitos'],
             'hora'           => $dados['hora'],
             'intervalo_dias' => $dados['intervalo_dias'],
@@ -21,6 +22,13 @@ $app->group('/api/agendamento', function () {
         // rota responsavel por recuperar os agendamentos de um determinado dispostivo
         $id_dp = $args['id_dp'];
         $agendamentos = Agendamento::select(['id','id_dp', 'circuitos', 'hora', 'intervalo_dias', 'dia_controle'])->where('id_dp', $id_dp)->get();
+
+        return $response->withJson($agendamentos);
+    });
+    $this->get('/recuperar_agendamentos/app/{id_dp}', function($request, $response, $args) {
+        // rota responsavel por recuperar os agendamentos de um determinado dispostivo
+        $id_dp = $args['id_dp'];
+        $agendamentos = Agendamento::where('id_dp', $id_dp)->get();
 
         return $response->withJson($agendamentos);
     });

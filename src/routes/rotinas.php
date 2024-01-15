@@ -13,13 +13,15 @@ $app->group('/api/rotina', function () {
         $rotinas = Rotina::where('id_dp', $id_dp)->get();
         return $response->withJson($rotinas);
     });
-    $this->post('/criar_rotinas', function ($request, $response){
+    $this->post('/criar_rotina', function ($request, $response){
         // rota responsavel por criar novas rotinas
         $dados = $request->getParsedBody();
         $id_dp = $dados['id_dp'];
         $circuitos = $dados['circuitos'];
+        $nome = $dados['nome'];
         Rotina::insert([
             'id_dp'     => $id_dp,
+            'nome'      => $nome,
             'circuitos' => $circuitos
         ]);
     });

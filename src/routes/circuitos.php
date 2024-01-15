@@ -35,6 +35,17 @@ $app->group('/api/circuito', function () {
         $retorno  = $circuito->adicionar_circuitos($db, $dados);
         return $response->withJson($retorno);
     });
+    $this->post("/novo_circuito", function($request, $response) {
+        $dados = $request->getParsedBody();
+        Circuito::insert([
+            'id_dp' => $dados['0']['idDp'],
+            'numero_circuito' => $dados['0']['numero_circuito'],
+            'nome' => $dados['0']['nome'],
+            'porta' => $dados['0']['porta'],
+            'icon' => $dados['0']['icon'],
+        ]);
+        return $response->withJson($dados);
+    });
     $this->put('/atualizar_circuito', function($request, $response) {
         // rota responsavel por atualizar dados de um circuito
         $dados = $request->getParsedBody();

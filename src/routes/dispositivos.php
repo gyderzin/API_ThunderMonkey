@@ -26,7 +26,7 @@ $app->group('/api/dispositivo', function () {
             'senha' => $senha
         ]);        
     });
-    $this->patch('/atualizar_dispositivo/primeiro_acesso', function ($request, $response) {   
+    $this->patch('/atualizar_dispositivo/primeiro_acesso', function ($request, $response) {
         // rota responsavel atualizar o primeiro acesso
        $dados = $request->getParsedBody();
        $id = $dados['id'];
