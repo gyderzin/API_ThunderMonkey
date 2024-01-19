@@ -48,6 +48,7 @@ $app->group('/api/agendamento', function () {
     $this->delete('/deletar_agendamento', function($request, $response){
         // rota responsavel por deletar um agendamento
         $dados = $request->getParsedBody();
+        $id = $dados['id'];
         Agendamento::where('id', $id)->delete();
     });
  });
