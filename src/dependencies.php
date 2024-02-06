@@ -29,10 +29,10 @@ $container['db'] = function($c){
 
 };
 $container['PDO'] = function($c) {
-    $host = "localhost";
-	$username = "root";
-	$password = "";
-	$db = "api-thunder_monkey";	
+    $host = "thunder_monkey.mysql.dbaas.com.br";
+	$username = "thunder_monkey";
+	$password = "Gyderlan@0404";
+	$db = "thunder_monkey";	
 
    	$conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
 
